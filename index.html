@@ -1,0 +1,945 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Domo IA | Propuesta Comercial Ejecutiva</title>
+  <style>
+    :root {
+      --navy: #1b2340;
+      --navy-2: #2d3963;
+      --teal: #33508f;
+      --teal-2: #3ecf94;
+      --gold: #d98e3a;
+      --gold-2: #e8a951;
+      --amber-ink: #a06a1f;
+      --cream: #f6f3ec;
+      --white: #ffffff;
+      --ink: #1f283c;
+      --muted: #5d6478;
+      --line: #e2dccc;
+      --soft: #f0ebe0;
+      --shadow: 0 20px 48px rgba(27,35,64,.12);
+    }
+
+    * { box-sizing: border-box; }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      margin: 0;
+      background: var(--cream);
+      color: var(--ink);
+      font-family: 'Segoe UI', Helvetica, Arial, sans-serif;
+      line-height: 1.45;
+    }
+
+    .deck { width: 100%; }
+
+    .slide {
+      width: 100%;
+      min-height: 100vh;
+      padding: 56px 72px;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      position: relative;
+      overflow: hidden;
+      border-bottom: 1px solid rgba(28,35,64,.12);
+    }
+
+    .slide.dark {
+      color: var(--white);
+      background:
+        radial-gradient(ellipse at 50% 135%, rgba(232,169,81,.24), transparent 62%),
+        radial-gradient(ellipse at 88% -20%, rgba(93,108,150,.35), transparent 55%),
+        linear-gradient(135deg, var(--navy) 0%, var(--navy-2) 60%, #141b33 100%);
+    }
+
+    .slide.light {
+      background:
+        radial-gradient(circle at 92% 10%, rgba(216,169,79,.08), transparent 32%),
+        var(--cream);
+    }
+
+    .slide::after {
+      content: "DOMO IA";
+      position: absolute;
+      right: 52px;
+      bottom: 30px;
+      font-size: 11px;
+      letter-spacing: .26em;
+      font-weight: 700;
+      color: rgba(28,35,64,.28);
+    }
+
+    .slide.dark::after { color: rgba(255,255,255,.34); }
+
+    .brand {
+      position: absolute;
+      top: 32px;
+      left: 72px;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      font-weight: 800;
+      font-size: 15px;
+      letter-spacing: .12em;
+      text-transform: uppercase;
+      white-space: nowrap;
+    }
+
+    .brand-mark {
+      display: inline-flex;
+      width: 26px;
+      height: 20px;
+      filter: drop-shadow(0 0 8px rgba(232,169,81,.45));
+    }
+
+    .brand-mark svg { width: 100%; height: 100%; overflow: visible; }
+
+    .eyebrow {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      width: fit-content;
+      margin-bottom: 18px;
+      color: var(--amber-ink);
+      font-weight: 700;
+      font-size: 12px;
+      letter-spacing: .15em;
+      text-transform: uppercase;
+    }
+
+    .dark .eyebrow { color: var(--gold-2); }
+
+    .eyebrow::before {
+      content: "";
+      width: 30px;
+      height: 2px;
+      border-radius: 10px;
+      background: currentColor;
+    }
+
+    h1, h2, h3, p { margin: 0; }
+
+    h1 {
+      max-width: 1020px;
+      font-size: clamp(42px, 6vw, 78px);
+      line-height: 1.04;
+      letter-spacing: -.03em;
+      font-weight: 700;
+    }
+
+    h2 {
+      max-width: 1020px;
+      font-size: clamp(32px, 4.2vw, 54px);
+      line-height: 1.08;
+      letter-spacing: -.025em;
+      font-weight: 700;
+      margin-bottom: 22px;
+    }
+
+    h3 {
+      font-size: 19px;
+      line-height: 1.2;
+      letter-spacing: -.01em;
+      font-weight: 700;
+      margin-bottom: 8px;
+    }
+
+    .subtitle {
+      max-width: 880px;
+      margin-top: 22px;
+      color: rgba(255,255,255,.76);
+      font-size: 19px;
+    }
+
+    .lead {
+      max-width: 900px;
+      color: var(--muted);
+      font-size: 17.5px;
+      margin-bottom: 28px;
+    }
+
+    .hero-grid {
+      display: grid;
+      grid-template-columns: 1.2fr .8fr;
+      gap: 48px;
+      align-items: center;
+    }
+
+    .hero-panel {
+      border: 1px solid rgba(255,255,255,.16);
+      background: rgba(255,255,255,.07);
+      border-radius: 14px;
+      padding: 28px;
+      box-shadow: 0 20px 50px rgba(0,0,0,.22);
+    }
+
+    .metric {
+      padding: 20px 0;
+      border-bottom: 1px solid rgba(255,255,255,.14);
+    }
+
+    .metric:last-child { border-bottom: 0; }
+
+    .metric b {
+      display: block;
+      color: var(--gold-2);
+      font-size: 34px;
+      line-height: 1;
+      letter-spacing: -.02em;
+      font-weight: 700;
+      margin-bottom: 8px;
+    }
+
+    .metric span {
+      color: rgba(255,255,255,.74);
+      font-size: 15.5px;
+    }
+
+    .chips {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+      margin-top: 24px;
+    }
+
+    .chip {
+      display: inline-flex;
+      align-items: center;
+      border: 1px solid rgba(255,255,255,.22);
+      color: rgba(255,255,255,.82);
+      background: rgba(255,255,255,.08);
+      border-radius: 20px;
+      padding: 9px 14px;
+      font-size: 13.5px;
+      font-weight: 600;
+    }
+
+    .light .chip {
+      color: var(--ink);
+      border-color: rgba(28,35,64,.15);
+      background: rgba(255,255,255,.75);
+    }
+
+    .grid-2, .grid-3, .grid-4 {
+      display: grid;
+      gap: 20px;
+    }
+
+    .grid-2 { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+    .grid-3 { grid-template-columns: repeat(3, minmax(0, 1fr)); }
+    .grid-4 { grid-template-columns: repeat(4, minmax(0, 1fr)); }
+
+    .card {
+      min-height: 200px;
+      border: 1px solid var(--line);
+      background: var(--white);
+      border-radius: 12px;
+      padding: 26px;
+      box-shadow: var(--shadow);
+    }
+
+    .card.dark-card {
+      color: var(--white);
+      border-color: rgba(255,255,255,.14);
+      background: rgba(255,255,255,.06);
+      box-shadow: none;
+    }
+
+    .card small {
+      display: block;
+      color: var(--amber-ink);
+      font-weight: 700;
+      font-size: 12px;
+      letter-spacing: .1em;
+      text-transform: uppercase;
+      margin-bottom: 12px;
+    }
+
+    .dark-card small { color: var(--gold-2); }
+
+    .card p, .step p, .module p, .phase p {
+      color: var(--muted);
+      font-size: 16px;
+    }
+
+    .stat-num {
+      display: block;
+      font-size: 40px;
+      font-weight: 700;
+      letter-spacing: -.02em;
+      color: var(--navy);
+      margin-bottom: 10px;
+    }
+
+    .footnote {
+      color: var(--muted);
+      font-size: 13px;
+      margin-top: 16px;
+    }
+
+    .who {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      margin-bottom: 12px;
+    }
+
+    .avatar {
+      width: 44px;
+      height: 44px;
+      border-radius: 50%;
+      flex: 0 0 44px;
+      overflow: hidden;
+      border: 2px solid var(--line);
+      background: var(--soft);
+      box-shadow: 0 4px 10px rgba(27,35,64,.15);
+    }
+
+    .avatar img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      object-position: 50% 22%;
+      display: block;
+    }
+
+    .dark-card p { color: rgba(255,255,255,.72); }
+
+    .quote {
+      max-width: 1020px;
+      font-size: clamp(32px, 4.4vw, 56px);
+      line-height: 1.12;
+      letter-spacing: -.02em;
+      font-weight: 700;
+    }
+
+    .quote span { color: var(--gold-2); }
+
+    .value-bar {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 14px;
+      margin-top: 30px;
+    }
+
+    .value-item {
+      border-top: 3px solid var(--gold);
+      background: var(--white);
+      border-radius: 10px;
+      padding: 18px;
+      min-height: 112px;
+      box-shadow: 0 10px 24px rgba(27,35,64,.10);
+    }
+
+    .value-item b {
+      display: block;
+      color: var(--ink);
+      font-size: 17px;
+      font-weight: 700;
+      margin-bottom: 8px;
+    }
+
+    .value-item span {
+      color: var(--muted);
+      font-size: 14px;
+    }
+
+    .journey {
+      display: grid;
+      grid-template-columns: repeat(4, minmax(0, 1fr));
+      gap: 16px;
+      margin-top: 16px;
+    }
+
+    .step {
+      position: relative;
+      min-height: 232px;
+      padding: 26px 22px;
+      border-radius: 12px;
+      background: var(--white);
+      border: 1px solid var(--line);
+      box-shadow: var(--shadow);
+      overflow: hidden;
+    }
+
+    .step::before {
+      content: "";
+      position: absolute;
+      inset: 0 0 auto 0;
+      height: 4px;
+      background: linear-gradient(90deg, var(--navy), var(--gold-2));
+    }
+
+    .step .num {
+      color: rgba(28,35,64,.16);
+      font-size: 44px;
+      line-height: 1;
+      font-weight: 800;
+      margin-bottom: 16px;
+    }
+
+    .modules {
+      display: grid;
+      gap: 16px;
+    }
+
+    .module {
+      display: grid;
+      grid-template-columns: 210px 1fr 270px;
+      gap: 20px;
+      align-items: start;
+      padding: 22px;
+      border: 1px solid var(--line);
+      background: var(--white);
+      border-radius: 12px;
+      box-shadow: var(--shadow);
+    }
+
+    .module .tag {
+      display: inline-flex;
+      width: fit-content;
+      color: var(--amber-ink);
+      background: rgba(216,169,79,.14);
+      border: 1px solid rgba(216,169,79,.30);
+      border-radius: 20px;
+      padding: 7px 12px;
+      font-weight: 700;
+      font-size: 12px;
+      letter-spacing: .08em;
+      text-transform: uppercase;
+      margin-bottom: 12px;
+    }
+
+    .module ul, .phase ul {
+      margin: 0;
+      padding-left: 18px;
+      color: var(--muted);
+      font-size: 15.5px;
+    }
+
+    .module li, .phase li { margin-bottom: 7px; }
+
+    .insight {
+      border-left: 3px solid var(--gold);
+      padding-left: 16px;
+      color: var(--muted);
+      font-size: 15px;
+      font-weight: 600;
+    }
+
+    .table-wrap {
+      overflow: hidden;
+      border-radius: 12px;
+      border: 1px solid var(--line);
+      box-shadow: var(--shadow);
+      background: var(--white);
+    }
+
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      font-size: 15.5px;
+    }
+
+    th, td {
+      text-align: left;
+      vertical-align: top;
+      padding: 18px 20px;
+      border-bottom: 1px solid var(--line);
+    }
+
+    tr:last-child td { border-bottom: 0; }
+
+    th {
+      background: var(--navy);
+      color: var(--white);
+      font-size: 12px;
+      line-height: 1.35;
+      letter-spacing: .1em;
+      font-weight: 700;
+      text-transform: uppercase;
+    }
+
+    td:first-child {
+      font-weight: 700;
+      color: var(--ink);
+      width: 24%;
+    }
+
+    td { color: var(--muted); }
+
+    .total-row td {
+      color: var(--navy);
+      background: var(--soft);
+      font-weight: 700;
+      border-top: 2px solid var(--gold);
+    }
+
+    .pill-note {
+      display: inline-flex;
+      align-items: center;
+      width: fit-content;
+      margin-top: 18px;
+      padding: 10px 14px;
+      border-radius: 20px;
+      background: rgba(216,169,79,.14);
+      color: var(--amber-ink);
+      font-size: 13.5px;
+      font-weight: 700;
+    }
+
+    .phase-grid {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 18px;
+    }
+
+    .phase {
+      min-height: 246px;
+      padding: 26px;
+      border-radius: 12px;
+      border: 1px solid var(--line);
+      background: var(--white);
+      box-shadow: var(--shadow);
+    }
+
+    .phase b {
+      display: inline-flex;
+      color: var(--gold);
+      font-size: 13px;
+      font-weight: 700;
+      letter-spacing: .12em;
+      text-transform: uppercase;
+      margin-bottom: 12px;
+    }
+
+    .final-grid {
+      display: grid;
+      grid-template-columns: 1.05fr .95fr;
+      gap: 24px;
+      align-items: stretch;
+    }
+
+    .proposal-box, .price-box {
+      padding: 30px;
+      border-radius: 14px;
+      border: 1px solid rgba(255,255,255,.15);
+      background: rgba(255,255,255,.07);
+    }
+
+    .proposal-box p, .price-box p {
+      color: rgba(255,255,255,.76);
+      font-size: 17px;
+    }
+
+    .price-placeholder {
+      margin-top: 22px;
+      padding: 20px 22px;
+      border-radius: 10px;
+      border: 1px dashed rgba(232,169,81,.75);
+      color: var(--gold-2);
+      font-size: 28px;
+      font-weight: 700;
+      letter-spacing: -.01em;
+      background: rgba(0,0,0,.14);
+    }
+
+    .mini {
+      margin-top: 14px;
+      color: rgba(255,255,255,.55);
+      font-size: 13px;
+    }
+
+    .footer-date {
+      position: absolute;
+      left: 72px;
+      bottom: 30px;
+      color: rgba(255,255,255,.45);
+      font-size: 12.5px;
+      font-weight: 600;
+    }
+
+    @media (max-width: 980px) {
+      .slide { padding: 92px 26px 48px; }
+      .brand { left: 26px; }
+      .hero-grid, .grid-2, .grid-3, .grid-4, .journey, .value-bar, .module, .phase-grid, .final-grid {
+        grid-template-columns: 1fr;
+      }
+      .module { gap: 10px; }
+      table { font-size: 13.5px; }
+      th, td { padding: 13px; }
+      .footer-date { left: 26px; }
+    }
+
+    @media print {
+      @page { size: landscape; margin: 0; }
+      body { background: var(--cream); }
+      .slide {
+        min-height: 100vh;
+        page-break-after: always;
+        break-after: page;
+      }
+    }
+  </style>
+</head>
+
+<body>
+  <main class="deck">
+
+    <section class="slide dark">
+      <div class="brand">
+        <span class="brand-mark">
+          <svg viewBox="0 0 60 44" aria-hidden="true">
+            <g fill="none" stroke="#e8a951" stroke-width="3.4" stroke-linecap="round">
+              <path d="M6 38 A24 24 0 0 1 54 38"/>
+              <path d="M14 38 A16 16 0 0 1 46 38" opacity=".65"/>
+              <path d="M22 38 A8 8 0 0 1 38 38" opacity=".4"/>
+            </g>
+            <circle cx="30" cy="38" r="4" fill="#e8a951"/>
+            <line x1="2" y1="38" x2="58" y2="38" stroke="currentColor" stroke-width="2.4" opacity=".55"/>
+          </svg>
+        </span>
+        DOMO IA
+      </div>
+      <div class="hero-grid">
+        <div>
+          <div class="eyebrow">Propuesta comercial ejecutiva</div>
+          <h1>Inteligencia artificial para vender mejor, no solo para automatizar.</h1>
+          <p class="subtitle">Un sistema integrado que conecta captación, venta, seguimiento, coaching y datos en un solo journey comercial medible.</p>
+          <div class="chips">
+            <span class="chip">Captación 24/7</span>
+            <span class="chip">Reuniones calificadas</span>
+            <span class="chip">Coaching comercial</span>
+            <span class="chip">Dashboard ejecutivo</span>
+          </div>
+        </div>
+        <div class="hero-panel">
+          <div class="metric"><b>+ velocidad</b><span>Atención y calificación de leads sin depender del horario del equipo.</span></div>
+          <div class="metric"><b>+ control</b><span>Visibilidad sobre lo que ocurre entre el lead, la reunión y el cierre.</span></div>
+          <div class="metric"><b>+ mejora</b><span>Feedback sistemático para elevar la ejecución comercial.</span></div>
+        </div>
+      </div>
+      <div class="footer-date">DOMO IA · Propuesta para comité comercial / gerencia</div>
+    </section>
+
+    <section class="slide light">
+      <div class="eyebrow">Tesis comercial</div>
+      <h2>El problema no es solo generar leads. Es convertirlos mejor.</h2>
+      <p class="lead">Muchas empresas ya invierten en marketing, CRM, WhatsApp, capacitación y reportes. El punto débil aparece cuando esas piezas funcionan separadas y nadie ve el journey completo.</p>
+      <div class="grid-3">
+        <div class="card">
+          <small>Fuga 1</small>
+          <h3>Leads atendidos tarde o sin estándar</h3>
+          <p>Se pierden oportunidades antes de que el ejecutivo comercial pueda intervenir.</p>
+        </div>
+        <div class="card">
+          <small>Fuga 2</small>
+          <h3>Reuniones sin aprendizaje acumulado</h3>
+          <p>La empresa no siempre sabe qué conductas comerciales aumentan o reducen el cierre.</p>
+        </div>
+        <div class="card">
+          <small>Fuga 3</small>
+          <h3>Datos dispersos y poca trazabilidad</h3>
+          <p>Marketing, ventas y gerencia miran indicadores distintos, en momentos distintos.</p>
+        </div>
+      </div>
+    </section>
+
+    <section class="slide dark">
+      <div class="eyebrow">La promesa</div>
+      <p class="quote">Domo IA convierte el proceso comercial en un <span>sistema observable, entrenable y optimizable.</span></p>
+      <div class="value-bar">
+        <div class="value-item">
+          <b>Captar</b>
+          <span>Recibir, responder, segmentar y calificar leads desde canales digitales y voz.</span>
+        </div>
+        <div class="value-item">
+          <b>Agendar</b>
+          <span>Convertir interés en reuniones concretas para el equipo comercial.</span>
+        </div>
+        <div class="value-item">
+          <b>Medir</b>
+          <span>Analizar conversaciones, reuniones, avance de funnel y resultados.</span>
+        </div>
+        <div class="value-item">
+          <b>Mejorar</b>
+          <span>Activar feedback, seguimiento y coaching comercial basado en evidencia.</span>
+        </div>
+      </div>
+    </section>
+
+    <section class="slide light">
+      <div class="eyebrow">Caso real · Nuevo Norte</div>
+      <h2>Esto no es una promesa: son resultados medidos.</h2>
+      <p class="lead">Corredora de inversión inmobiliaria en Santiago que capta inversionistas con Meta Ads. Datos de operación real, junio-julio 2026 (7 semanas continuas).</p>
+      <div class="grid-3">
+        <div class="card">
+          <span class="stat-num">54%</span>
+          <p>de los leads escribió fuera de horario hábil (L-V 9:00-19:00). Todos fueron atendidos al momento por Antonia.</p>
+        </div>
+        <div class="card">
+          <span class="stat-num">406</span>
+          <p>conversaciones de leads atendidas y registradas en CRM desde junio, sin digitación manual.</p>
+        </div>
+        <div class="card">
+          <span class="stat-num">US$1,56</span>
+          <p>costo publicitario por conversación iniciada, medido en los últimos 30 días.</p>
+        </div>
+      </div>
+      <h3 style="margin-top:30px;">Embudo completo (acumulado)</h3>
+      <div class="value-bar">
+        <div class="value-item"><b>406 · 100%</b><span>Escribieron por WhatsApp</span></div>
+        <div class="value-item"><b>225 · 55%</b><span>Declararon presupuesto</span></div>
+        <div class="value-item"><b>27 · 7%</b><span>Eligieron horario</span></div>
+        <div class="value-item"><b>8 · 2%</b><span>Reunión agendada</span></div>
+      </div>
+      <p class="footnote">De los 225 que declararon presupuesto, 36 cumplieron el perfil de inversión: el filtro protege la agenda del asesor. El ciclo de una inversión inmobiliaria toma meses y llevamos 7 semanas de operación — se muestra el embudo completo antes que inflar promesas.</p>
+    </section>
+
+    <section class="slide light">
+      <div class="eyebrow">Journey end-to-end</div>
+      <h2>Un solo flujo, cuatro roles coordinados.</h2>
+      <div class="journey">
+        <div class="step">
+          <div class="num">01</div>
+          <h3>Matías & Sofía</h3>
+          <p>Tráfico, datos y tablero único: leads, conversión, ingresos y estado del funnel comercial.</p>
+        </div>
+        <div class="step">
+          <div class="num">02</div>
+          <h3>Antonia</h3>
+          <p>Captación inteligente: responde, califica, segmenta y agenda reuniones con leads priorizados.</p>
+        </div>
+        <div class="step">
+          <div class="num">03</div>
+          <h3>Ejecutivo comercial</h3>
+          <p>Toma la reunión calificada y ejecuta la venta con mejor contexto y trazabilidad.</p>
+        </div>
+        <div class="step">
+          <div class="num">04</div>
+          <h3>Amanda & Lucas</h3>
+          <p>Analizan reuniones, generan score, detectan patrones y activan seguimiento y coaching.</p>
+        </div>
+      </div>
+      <div class="pill-note">El agente de voz es un canal complementario para captación o seguimiento, y Clara audita a diario todo el embudo para que ninguna oportunidad se pierda.</div>
+    </section>
+
+    <section class="slide light">
+      <div class="eyebrow">Qué hace cada agente</div>
+      <h2>Roles claros, sin redundancias.</h2>
+      <div class="modules">
+        <div class="module">
+          <div>
+            <span class="tag">Datos & funnel</span>
+            <div class="who">
+              <span class="avatar"><img src="https://domo-ia.com/assets/web/retrato-matias.jpg" alt="Matías"></span>
+              <span class="avatar"><img src="https://domo-ia.com/assets/web/retrato-sofia.jpg" alt="Sofía"></span>
+            </div>
+            <h3>Matías & Sofía</h3>
+          </div>
+          <ul>
+            <li>Matías vigila Meta Ads 24/7 y entrega un briefing diario de rendimiento por anuncio.</li>
+            <li>Sofía entrega cada semana un kit de creativos nuevos para testear ángulos de campaña.</li>
+            <li>La gerencia accede a un tablero único de verdad comercial, actualizado en tiempo real.</li>
+          </ul>
+          <div class="insight">Valor: dejar de mirar piezas sueltas y pasar a gobernar el funnel completo, con datos y creativos que se retroalimentan.</div>
+        </div>
+
+        <div class="module">
+          <div>
+            <span class="tag">Captación</span>
+            <div class="who">
+              <span class="avatar"><img src="https://domo-ia.com/assets/web/retrato-antonia.jpg" alt="Antonia"></span>
+            </div>
+            <h3>Antonia</h3>
+          </div>
+          <ul>
+            <li>Responde cada lead en segundos, 24/7, incluidos fines de semana y madrugada.</li>
+            <li>Califica por presupuesto y perfil, agenda con Google Meet real y registra todo en el CRM sin digitación manual.</li>
+            <li>Mide la intención de compra de cada lead (alta, media o baja) y hace seguimiento automático a quien queda a medio camino.</li>
+          </ul>
+          <div class="insight">Valor: cada reunión llega al ejecutivo con contexto y nivel de intención ya evaluado.</div>
+        </div>
+
+        <div class="module">
+          <div>
+            <span class="tag">Calidad & auditoría</span>
+            <div class="who">
+              <span class="avatar"><img src="https://domo-ia.com/assets/web/retrato-clara.jpg" alt="Clara"></span>
+            </div>
+            <h3>Clara</h3>
+          </div>
+          <ul>
+            <li>Audita a diario el CRM y las conversaciones de todo el embudo.</li>
+            <li>Detecta leads atascados, citas mal registradas y patrones de fuga antes de que cuesten una venta.</li>
+            <li>Reporta los hallazgos directamente al equipo comercial.</li>
+          </ul>
+          <div class="insight">Valor: una capa de control de calidad que vigila que ninguna oportunidad se pierda por error operativo.</div>
+        </div>
+
+        <div class="module">
+          <div>
+            <span class="tag">Coaching</span>
+            <div class="who">
+              <span class="avatar"><img src="https://domo-ia.com/assets/web/retrato-amanda.jpg" alt="Amanda"></span>
+              <span class="avatar"><img src="https://domo-ia.com/assets/web/retrato-lucas.jpg" alt="Lucas"></span>
+            </div>
+            <h3>Amanda & Lucas</h3>
+          </div>
+          <ul>
+            <li>Amanda transcribe y estructura cada reunión de venta apenas termina, sin que nadie mueva un dedo.</li>
+            <li>Lucas evalúa la reunión con una rúbrica comercial y entrega feedback concreto al asesor.</li>
+            <li>Las transcripciones nunca salen del entorno del cliente: los informes no incluyen datos personales de los leads.</li>
+          </ul>
+          <div class="insight">Valor: convertir cada reunión en aprendizaje comercial medible y feedback accionable.</div>
+        </div>
+      </div>
+    </section>
+
+    <section class="slide light">
+      <div class="eyebrow">Impacto medido</div>
+      <h2>Cerca de una media jornada laboral devuelta cada mes.</h2>
+      <p class="lead">Estimación conservadora del trabajo manual que hoy hace el equipo digital de Nuevo Norte, con la cadencia real de cada rol (Matías y Clara corren todos los días; Sofía, cada semana; Amanda y Lucas, por cada reunión realizada).</p>
+      <div class="table-wrap">
+        <table>
+          <thead>
+            <tr>
+              <th>Rol</th>
+              <th>Trabajo que reemplaza</th>
+              <th>Tiempo recuperado</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>Antonia</td>
+              <td>Trabajo medido del caso: calificación, agenda y registro en CRM de 406 conversaciones.</td>
+              <td>+40 h / mes</td>
+            </tr>
+            <tr>
+              <td>Resto del equipo<br><span style="font-weight:500;color:var(--muted);">Matías, Sofía, Clara, Amanda y Lucas</span></td>
+              <td>Equivalente estimado de pauta, creativos, auditoría y coaching de reuniones.</td>
+              <td>≈ 38 h / mes + 1¼ h por reunión</td>
+            </tr>
+            <tr class="total-row">
+              <td>Equipo completo Domo IA</td>
+              <td>Horas devueltas al mes, sin contar el trabajo por reunión de Amanda y Lucas.</td>
+              <td>≈ 78 h / mes</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+      <div class="pill-note">Trabajo nuevo que antes nadie hacía: atención inmediata al 54% de leads fuera de horario, seguimiento cada 30 minutos y visibilidad del embudo en tiempo real.</div>
+    </section>
+
+    <section class="slide light">
+      <div class="eyebrow">Valorización comparativa</div>
+      <h2>Lo que normalmente se compra separado, Domo IA lo integra.</h2>
+      <p class="lead">Más allá de las horas que recupera el equipo, esto es lo que cuesta armar el mismo sistema con proveedores separados en el mercado. Se eliminó la columna de precio de módulos DOMO IA: la tabla mantiene solo la referencia de mercado.</p>
+      <div class="table-wrap">
+        <table>
+          <thead>
+            <tr>
+              <th>Etapa</th>
+              <th>Qué reemplaza en el mercado</th>
+              <th>Precio de mercado por separado</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>Datos & Dashboard<br><span style="font-weight:500;color:var(--muted);">Matías & Sofía</span></td>
+              <td>Herramientas BI/dashboard para pymes, servicios gestionados de reportería y tableros comerciales.</td>
+              <td>$150.000 - $450.000 / mes</td>
+            </tr>
+            <tr>
+              <td>Captación IA<br><span style="font-weight:500;color:var(--muted);">Antonia</span></td>
+              <td>Agencia o plataforma de chatbot/IA conversacional en WhatsApp con calificación y agenda.</td>
+              <td>$450.000 - $950.000 / mes</td>
+            </tr>
+            <tr>
+              <td>Coaching & Monitoreo<br><span style="font-weight:500;color:var(--muted);">Amanda & Lucas</span></td>
+              <td>Software de conversation intelligence más tiempo dedicado de coaching comercial humano.</td>
+              <td>$1.800.000 - $3.000.000 / mes para equipos de ~5 a 8 ejecutivos.</td>
+            </tr>
+            <tr>
+              <td>Agente de voz<br><span style="font-weight:500;color:var(--muted);">Canal telefónico</span></td>
+              <td>Plataformas de voz IA inbound/outbound con cargo variable por minuto, llamada o asistente.</td>
+              <td>$400 - $1.200 / llamada</td>
+            </tr>
+            <tr class="total-row">
+              <td>Total referencial separado</td>
+              <td>Licencias, proveedores distintos, integraciones y gestión operativa fragmentada.</td>
+              <td>$2.400.000 - $4.200.000 / mes + uso variable de voz</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </section>
+
+    <section class="slide light">
+      <div class="eyebrow">Propuesta de implementación</div>
+      <h2>Partir con un piloto corto, ejecutivo y medible.</h2>
+      <div class="phase-grid">
+        <div class="phase">
+          <b>Semana 1</b>
+          <h3>Diagnóstico comercial</h3>
+          <ul>
+            <li>Mapeo de fuentes de leads, canales y responsables.</li>
+            <li>Definición de métricas críticas del funnel.</li>
+            <li>Priorización de módulos a activar.</li>
+          </ul>
+        </div>
+        <div class="phase">
+          <b>Semanas 2 a 4</b>
+          <h3>Activación operativa</h3>
+          <ul>
+            <li>Configuración de flujos, guiones y criterios de calificación.</li>
+            <li>Medición de leads, agenda, reuniones y seguimiento.</li>
+            <li>Reportes ejecutivos de avance y brechas.</li>
+          </ul>
+        </div>
+        <div class="phase">
+          <b>Cierre del piloto</b>
+          <h3>Decisión y escalamiento</h3>
+          <ul>
+            <li>Informe de resultados y oportunidades de mejora.</li>
+            <li>Recomendaciones para equipo comercial y gerencia.</li>
+            <li>Plan de continuidad por módulos y alcance.</li>
+          </ul>
+        </div>
+      </div>
+      <div class="pill-note">Objetivo del piloto: demostrar dónde se pierde venta y qué acciones mejoran conversión, asistencia, seguimiento y desempeño comercial — así opera hoy, en su séptima semana, el piloto de Nuevo Norte.</div>
+    </section>
+
+    <section class="slide dark">
+      <div class="eyebrow">Cierre comercial</div>
+      <h2>La conversación no parte por tecnología. Parte por performance comercial.</h2>
+      <div class="final-grid">
+        <div class="proposal-box">
+          <h3>Qué proponemos para la reunión</h3>
+          <p>En una reunión de diagnóstico de 40 minutos —sin costo y sin compromiso— revisamos su embudo actual: cuántos leads llegan, cuánto demoran en ser atendidos y dónde se están perdiendo. Salen de la reunión con ese diagnóstico, trabajen o no con nosotros.</p>
+          <div class="chips">
+            <span class="chip">Lead a reunión</span>
+            <span class="chip">Asistencia</span>
+            <span class="chip">Calidad de venta</span>
+            <span class="chip">Seguimiento</span>
+            <span class="chip">Conversión</span>
+          </div>
+          <p class="mini">La solución final se ajusta según volumen de leads, equipo comercial, canales, integraciones y nivel de acompañamiento. Escríbenos a contacto@domoia-chile.com para agendar el diagnóstico.</p>
+        </div>
+        <div class="price-box">
+          <h3>Valor del servicio</h3>
+          <p>El precio se mantiene pendiente hasta definir alcance, módulos activos y modalidad de piloto o suscripción.</p>
+          <div class="price-placeholder">$ ____________ / mes</div>
+          <p class="mini">Precio final a definir por Domo IA.</p>
+        </div>
+      </div>
+      <div class="footer-date">DOMO IA · Propuesta comercial · 2026</div>
+    </section>
+
+  </main>
+</body>
+</html>
